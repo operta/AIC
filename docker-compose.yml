@@ -1,0 +1,110 @@
+version: "3"
+
+services:
+  controller:
+    container_name: controller
+    build:
+      context: ./controller
+    ports:
+      - 5000:5000
+      - 8180:8180
+    networks:
+      - g7t3-network
+
+  worker1:
+    container_name: worker1
+    build:
+      context: ./worker
+    environment: 
+      CONTROLLER_URL: "http://controller:5000"
+      WORKER_ID: 1
+      PORT: 8181
+      HOST: "worker1"
+    ports:
+      - 8181:8181
+    networks:
+      - g7t3-network
+
+  worker2:
+    container_name: worker2
+    build:
+      context: ./worker
+    environment:
+      CONTROLLER_URL: "http://controller:5000"
+      WORKER_ID: 2
+      PORT: 8182
+      HOST: "worker2"
+    ports:
+      - 8182:8182
+    networks:
+      - g7t3-network
+
+  worker3:
+    container_name: worker3
+    build:
+      context: ./worker
+    environment:
+      CONTROLLER_URL: "http://controller:5000"
+      WORKER_ID: 3
+      PORT: 8183
+      HOST: "worker3"
+    ports:
+      - 8183:8183
+    networks:
+      - g7t3-network
+
+  worker4:
+    container_name: worker4
+    build:
+      context: ./worker
+    environment:
+      CONTROLLER_URL: "http://controller:5000"
+      WORKER_ID: 4
+      PORT: 8184
+      HOST: "worker4"
+    ports:
+      - 8184:8184
+    networks:
+      - g7t3-network
+
+  worker5:
+    container_name: worker5
+    build:
+      context: ./worker
+    environment:
+      CONTROLLER_URL: "http://controller:5000"
+      WORKER_ID: 5
+      PORT: 8185
+      HOST: "worker5"
+    ports:
+      - 8185:8185
+    networks:
+      - g7t3-network
+      
+  worker6:
+    container_name: worker6
+    build:
+      context: ./worker
+    environment:
+      CONTROLLER_URL: "http://controller:5000"
+      WORKER_ID: 6
+      PORT: 8186
+      HOST: "worker6"
+    ports:
+      - 8186:8186
+    networks:
+      - g7t3-network
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080 
+    networks:
+      - g7t3-network
+
+networks:
+  g7t3-network:
+    name: g7t3-network
